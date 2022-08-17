@@ -13,7 +13,7 @@ import io.qase.api.utils.CucumberUtils;
 import io.qase.client.model.ResultCreate;
 import io.qase.client.model.ResultCreate.StatusEnum;
 import io.qase.client.model.ResultCreateSteps;
-import io.qase.client.services.QaseTestCaseListener;
+import io.qase.api.services.QaseTestCaseListener;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -44,7 +44,7 @@ public class QaseEventListener implements Formatter {
     }
 
     private void testRunFinished(TestRunFinished testRunFinished) {
-        getQaseTestCaseListener().reportResults();
+        getQaseTestCaseListener().onTestCasesSetFinished();
     }
 
     private void testCaseStarted(TestCaseStarted event) {
@@ -52,10 +52,10 @@ public class QaseEventListener implements Formatter {
     }
 
     private void testCaseFinished(TestCaseFinished event) {
-        getQaseTestCaseListener().onTestCaseFinished(getResultItem(event));
+        getQaseTestCaseListener().onTestCaseFinished(resultCreate -> setupResultItem(resultCreate, event));
     }
 
-    private ResultCreate getResultItem(TestCaseFinished event) {
+    private void setupResultItem(ResultCreate resultCreate, TestCaseFinished event) {
         List<PickleTag> pickleTags = event.testCase.getTags();
         List<String> tags = pickleTags.stream().map(PickleTag::getName).collect(Collectors.toList());
         Long caseId = CucumberUtils.getCaseId(tags);
@@ -68,8 +68,8 @@ public class QaseEventListener implements Formatter {
             .orElse(false);
         String stacktrace = optionalThrowable
             .flatMap(throwable -> Optional.of(getStacktrace(throwable))).orElse(null);
-        LinkedList<ResultCreateSteps> steps = StepStorage.getSteps();
-        return new ResultCreate()
+        LinkedList<ResultCreateSteps> steps = StepStorage.stopSteps();
+        resultCreate
             .caseId(caseId)
             .status(status)
             .comment(comment)

@@ -7,12 +7,10 @@ import io.qase.client.ApiClient;
 import io.qase.client.api.AttachmentsApi;
 import io.qase.client.api.ResultsApi;
 import io.qase.client.api.RunsApi;
-import io.qase.client.services.QaseTestCaseListener;
-import io.qase.client.services.ReportersResultOperations;
-import io.qase.client.services.ScreenshotsSender;
-import io.qase.client.services.impl.AttachmentsApiScreenshotsUploader;
-import io.qase.client.services.impl.QaseTestCaseListenerImpl;
-import io.qase.client.services.impl.ReportersResultOperationsImpl;
+import io.qase.api.services.QaseTestCaseListener;
+import io.qase.api.services.ReportersResultOperations;
+import io.qase.api.services.impl.QaseTestCaseListenerImpl;
+import io.qase.api.services.impl.ReportersResultOperationsImpl;
 
 public class QaseModule extends AbstractModule {
 
@@ -42,12 +40,6 @@ public class QaseModule extends AbstractModule {
     @Singleton
     public RunsApi runsApi(ApiClient apiClient) {
         return new RunsApi(apiClient);
-    }
-
-    @Provides
-    @Singleton
-    public ScreenshotsSender screenshotsSender(AttachmentsApi attachmentsApi) {
-        return new AttachmentsApiScreenshotsUploader(attachmentsApi);
     }
 
     @Provides

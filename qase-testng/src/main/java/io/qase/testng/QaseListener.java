@@ -6,7 +6,7 @@ import io.qase.client.model.ResultCreate;
 import io.qase.client.model.ResultCreate.StatusEnum;
 import io.qase.client.model.ResultCreateCase;
 import io.qase.client.model.ResultCreateSteps;
-import io.qase.client.services.QaseTestCaseListener;
+import io.qase.api.services.QaseTestCaseListener;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.testng.ITestContext;
@@ -40,23 +40,25 @@ public class QaseListener extends TestListenerAdapter implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult tr) {
-        getQaseTestCaseListener().onTestCaseFinished(getResultItem(tr, StatusEnum.PASSED));
+        getQaseTestCaseListener()
+            .onTestCaseFinished(resultCreate -> setupResultItem(resultCreate, tr, StatusEnum.PASSED));
         super.onTestSuccess(tr);
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        getQaseTestCaseListener().onTestCaseFinished(getResultItem(tr, StatusEnum.FAILED));
+        getQaseTestCaseListener()
+            .onTestCaseFinished(resultCreate -> setupResultItem(resultCreate, tr, StatusEnum.FAILED));
         super.onTestFailure(tr);
     }
 
     @Override
     public void onFinish(ITestContext testContext) {
-        getQaseTestCaseListener().reportResults();
+        getQaseTestCaseListener().onTestCasesSetFinished();
         super.onFinish(testContext);
     }
 
-    private ResultCreate getResultItem(ITestResult result, StatusEnum status) {
+    private void setupResultItem(ResultCreate resultCreate, ITestResult result, StatusEnum status) {
         Optional<Throwable> resultThrowable = Optional.ofNullable(result.getThrowable());
         String comment = resultThrowable
                 .flatMap(throwable -> Optional.of(throwable.toString())).orElse(null);
@@ -71,14 +73,14 @@ public class QaseListener extends TestListenerAdapter implements ITestListener {
         if (caseId == null) {
             caseTitle = getCaseTitle(method);
         }
-        LinkedList<ResultCreateSteps> steps = StepStorage.getSteps();
-        return new ResultCreate()
-                ._case(caseTitle == null ? null : new ResultCreateCase().title(caseTitle))
-                .caseId(caseId)
-                .status(status)
-                .comment(comment)
-                .stacktrace(stacktrace)
-                .steps(steps.isEmpty() ? null : steps)
-                .defect(isDefect);
+        LinkedList<ResultCreateSteps> steps = StepStorage.stopSteps();
+        resultCreate
+            ._case(caseTitle == null ? null : new ResultCreateCase().title(caseTitle))
+            .caseId(caseId)
+            .status(status)
+            .comment(comment)
+            .stacktrace(stacktrace)
+            .steps(steps.isEmpty() ? null : steps)
+            .defect(isDefect);
     }
 }
