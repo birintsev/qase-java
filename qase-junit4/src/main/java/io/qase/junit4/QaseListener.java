@@ -9,7 +9,7 @@ import io.qase.client.model.ResultCreate;
 import io.qase.client.model.ResultCreate.StatusEnum;
 import io.qase.client.model.ResultCreateCase;
 import io.qase.client.model.ResultCreateSteps;
-import io.qase.client.services.QaseTestCaseListener;
+import io.qase.api.services.QaseTestCaseListener;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -44,31 +44,38 @@ public class QaseListener extends RunListener {
 
     @Override
     public void testFinished(Description description) {
-        getQaseTestCaseListener().onTestCaseFinished(getResultItem(description, PASSED, null));
+        getQaseTestCaseListener().onTestCaseFinished(
+            resultCreate -> setupResultItem(resultCreate, description, PASSED, null)
+        );
     }
 
     @Override
     public void testFailure(Failure failure) {
-        getQaseTestCaseListener()
-            .onTestCaseFinished(getResultItem(failure.getDescription(), FAILED, failure.getException()));
+        getQaseTestCaseListener().onTestCaseFinished(
+            resultCreate -> setupResultItem(resultCreate, failure.getDescription(), FAILED, failure.getException())
+        );
     }
 
     @Override
     public void testAssumptionFailure(Failure failure) {
-        getQaseTestCaseListener().onTestCaseFinished(getResultItem(failure.getDescription(), SKIPPED, null));
+        getQaseTestCaseListener().onTestCaseFinished(
+            resultCreate -> setupResultItem(resultCreate, failure.getDescription(), SKIPPED, null)
+        );
     }
 
     @Override
     public void testIgnored(Description description) {
-        getQaseTestCaseListener().onTestCaseFinished(getResultItem(description, SKIPPED, null));
+        getQaseTestCaseListener().onTestCaseFinished(
+            resultCreate -> setupResultItem(resultCreate, description, SKIPPED, null)
+        );
     }
 
     @Override
     public void testRunFinished(Result result) {
-        getQaseTestCaseListener().reportResults();
+        getQaseTestCaseListener().onTestCasesSetFinished();
     }
 
-    private ResultCreate getResultItem(Description description, StatusEnum status, Throwable error) {
+    private ResultCreate setupResultItem(ResultCreate resultCreate, Description description, StatusEnum status, Throwable error) {
         Long caseId = getCaseId(description);
         String caseTitle = null;
         if (caseId == null) {
@@ -76,21 +83,21 @@ public class QaseListener extends RunListener {
         }
         Optional<Throwable> optionalThrowable = Optional.ofNullable(error);
         String comment = optionalThrowable
-                .flatMap(throwable -> Optional.of(throwable.toString())).orElse(null);
+            .flatMap(throwable -> Optional.of(throwable.toString())).orElse(null);
         Boolean isDefect = optionalThrowable
-                .flatMap(throwable -> Optional.of(throwable instanceof AssertionError))
-                .orElse(false);
+            .flatMap(throwable -> Optional.of(throwable instanceof AssertionError))
+            .orElse(false);
         String stacktrace = optionalThrowable
-                .flatMap(throwable -> Optional.of(getStacktrace(throwable))).orElse(null);
-        LinkedList<ResultCreateSteps> steps = StepStorage.getSteps();
-        return new ResultCreate()
-                ._case(caseTitle == null ? null : new ResultCreateCase().title(caseTitle))
-                .caseId(caseId)
-                .status(status)
-                .comment(comment)
-                .stacktrace(stacktrace)
-                .steps(steps.isEmpty() ? null : steps)
-                .defect(isDefect);
+            .flatMap(throwable -> Optional.of(getStacktrace(throwable))).orElse(null);
+        LinkedList<ResultCreateSteps> steps = StepStorage.stopSteps();
+        return resultCreate
+            ._case(caseTitle == null ? null : new ResultCreateCase().title(caseTitle))
+            .caseId(caseId)
+            .status(status)
+            .comment(comment)
+            .stacktrace(stacktrace)
+            .steps(steps.isEmpty() ? null : steps)
+            .defect(isDefect);
     }
 
     private Long getCaseId(Description description) {

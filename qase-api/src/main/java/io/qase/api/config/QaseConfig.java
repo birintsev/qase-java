@@ -26,11 +26,9 @@ public interface QaseConfig extends Reloadable, Mutable {
 
     String QASE_RUN_COMPLETE_KEY = "QASE_RUN_COMPLETE";
 
-    String QASE_SCREENSHOT_FOLDER_KEY = "QASE_SCREENSHOT_FOLDER";
-
     String QASE_SCREENSHOT_SENDING_KEY = "QASE_SCREENSHOT_SENDING";
 
-    String QASE_SCREENSHOT_EXTENSIONS_KEY = "QASE_SCREENSHOT_EXTENSIONS";
+    String QASE_CLIENT_REPORTER_NAME_KEY = "QASE_CLIENT_REPORTER_NAME";
 
     String QASE_TEST_PLAN_ID_KEY = "QASE_TEST_PLAN_ID";
 
@@ -69,16 +67,9 @@ public interface QaseConfig extends Reloadable, Mutable {
     @Key(QASE_RUN_COMPLETE_KEY)
     Boolean runComplete();
 
-    @Key(QASE_SCREENSHOT_FOLDER_KEY)
-    String screenshotFolder();
-
     @Key(QASE_SCREENSHOT_SENDING_KEY)
     @DefaultValue("false")
     Boolean screenshotSendingPermitted();
-
-    @Key(QASE_SCREENSHOT_EXTENSIONS_KEY)
-    @DefaultValue("jpg,jpeg,svg,png")
-    String screenshotsExtensions();
 
     @Key(RUN_AUTOCOMPLETE_KEY)
     @DefaultValue("false")
