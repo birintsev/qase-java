@@ -32,6 +32,8 @@ public interface QaseConfig extends Reloadable, Mutable {
 
     String QASE_SCREENSHOT_EXTENSIONS_KEY = "QASE_SCREENSHOT_EXTENSIONS";
 
+    String QASE_TEST_PLAN_ID_KEY = "QASE_TEST_PLAN_ID";
+
     String QASE_CLIENT_REPORTER_NAME_KEY = "QASE_CLIENT_REPORTER_NAME";
 
     @Key(ENABLE_KEY)
