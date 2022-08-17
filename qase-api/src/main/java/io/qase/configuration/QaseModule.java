@@ -44,12 +44,6 @@ public class QaseModule extends AbstractModule {
 
     @Provides
     @Singleton
-    public ScreenshotsSender screenshotsSender(AttachmentsApi attachmentsApi) {
-        return new AttachmentsApiScreenshotsUploader(attachmentsApi);
-    }
-
-    @Provides
-    @Singleton
     public AttachmentsApi attachmentsApi(ApiClient apiClient) {
         return new AttachmentsApi(apiClient);
     }
