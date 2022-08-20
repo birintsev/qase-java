@@ -1,16 +1,16 @@
-package io.qase.maven.plugin.testplan.impl;
+package io.qase.plugin.maven.testplan.impl;
 
 import io.qase.api.annotation.CaseId;
 import io.qase.api.exceptions.QaseException;
 import io.qase.api.exceptions.UncheckedQaseException;
 import io.qase.api.service.TestPlanService;
-import io.qase.maven.plugin.QaseSurefirePlugin;
-import io.qase.maven.plugin.codeparsing.ClassParser;
-import io.qase.maven.plugin.codeparsing.MethodFilter;
-import io.qase.maven.plugin.codeparsing.criteria.CriteriaUtils;
-import io.qase.maven.plugin.codeparsing.criteria.MethodInfoCriteria;
-import io.qase.maven.plugin.codeparsing.model.ClassInfo;
-import io.qase.maven.plugin.testplan.TestPlanExecutionSetupStrategy;
+import io.qase.plugin.maven.QaseSurefirePlugin;
+import io.qase.plugin.maven.codeparsing.ClassParser;
+import io.qase.plugin.maven.codeparsing.MethodFilter;
+import io.qase.plugin.maven.codeparsing.criteria.CriteriaUtils;
+import io.qase.plugin.maven.codeparsing.criteria.MethodInfoCriteria;
+import io.qase.plugin.maven.codeparsing.model.ClassInfo;
+import io.qase.plugin.maven.testplan.TestPlanExecutionSetupStrategy;
 import lombok.RequiredArgsConstructor;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package io.qase.maven.plugin.codeparsing.criteria;
+package io.qase.plugin.maven.codeparsing.criteria;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

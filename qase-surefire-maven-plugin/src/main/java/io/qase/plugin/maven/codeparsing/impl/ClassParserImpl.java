@@ -1,8 +1,8 @@
-package io.qase.maven.plugin.codeparsing.impl;
+package io.qase.plugin.maven.codeparsing.impl;
 
-import io.qase.maven.plugin.codeparsing.model.ClassInfo;
-import io.qase.maven.plugin.codeparsing.ClassParser;
-import io.qase.maven.plugin.codeparsing.visitor.ClassInfoVisitor;
+import io.qase.plugin.maven.codeparsing.model.ClassInfo;
+import io.qase.plugin.maven.codeparsing.ClassParser;
+import io.qase.plugin.maven.codeparsing.visitor.ClassInfoVisitor;
 import org.objectweb.asm.ClassReader;
 
 import java.io.IOException;

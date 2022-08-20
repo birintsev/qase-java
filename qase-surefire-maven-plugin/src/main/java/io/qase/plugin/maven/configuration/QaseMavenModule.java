@@ -1,14 +1,14 @@
-package io.qase.maven.plugin.configuration;
+package io.qase.plugin.maven.configuration;
 
 import com.google.inject.*;
 import io.qase.api.service.TestPlanService;
 import io.qase.api.service.impl.TestPlanServiceImpl;
 import io.qase.client.api.PlansApi;
 import io.qase.configuration.QaseModule;
-import io.qase.maven.plugin.codeparsing.ClassParser;
-import io.qase.maven.plugin.codeparsing.MethodFilter;
-import io.qase.maven.plugin.codeparsing.impl.ClassParserImpl;
-import io.qase.maven.plugin.codeparsing.impl.MethodFilterImpl;
+import io.qase.plugin.maven.codeparsing.ClassParser;
+import io.qase.plugin.maven.codeparsing.MethodFilter;
+import io.qase.plugin.maven.codeparsing.impl.ClassParserImpl;
+import io.qase.plugin.maven.codeparsing.impl.MethodFilterImpl;
 
 public class QaseMavenModule extends AbstractModule {
 

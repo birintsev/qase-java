@@ -1,15 +1,15 @@
-package io.qase.maven.plugin.testplan;
+package io.qase.plugin.maven.testplan;
 
 import io.qase.api.service.TestPlanService;
-import io.qase.maven.plugin.QaseSurefirePlugin;
-import io.qase.maven.plugin.codeparsing.ClassParser;
-import io.qase.maven.plugin.codeparsing.MethodFilter;
-import io.qase.maven.plugin.testplan.impl.CucumberStrategy;
-import io.qase.maven.plugin.testplan.impl.DefaultStrategy;
+import io.qase.plugin.maven.QaseSurefirePlugin;
+import io.qase.plugin.maven.codeparsing.ClassParser;
+import io.qase.plugin.maven.codeparsing.MethodFilter;
+import io.qase.plugin.maven.testplan.impl.CucumberStrategy;
+import io.qase.plugin.maven.testplan.impl.DefaultStrategy;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import static io.qase.maven.plugin.configuration.QaseMavenModule.INJECTOR;
+import static io.qase.plugin.maven.configuration.QaseMavenModule.INJECTOR;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TestPlanExecutionSetupStrategyFactory {

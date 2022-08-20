@@ -1,6 +1,6 @@
-package io.qase.maven.plugin.codeparsing;
+package io.qase.plugin.maven.codeparsing;
 
-import io.qase.maven.plugin.codeparsing.model.ClassInfo;
+import io.qase.plugin.maven.codeparsing.model.ClassInfo;
 
 import java.io.IOException;
 import java.io.InputStream;

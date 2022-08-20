@@ -1,4 +1,4 @@
-package io.qase.maven.plugin.codeparsing.model;
+package io.qase.plugin.maven.codeparsing.model;
 
 import lombok.Getter;
 import lombok.Setter;

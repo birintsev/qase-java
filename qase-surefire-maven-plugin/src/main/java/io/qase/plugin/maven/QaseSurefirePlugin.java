@@ -1,7 +1,7 @@
-package io.qase.maven.plugin;
+package io.qase.plugin.maven;
 
 import io.qase.api.config.QaseConfig;
-import io.qase.maven.plugin.testplan.TestPlanExecutionSetupStrategyFactory;
+import io.qase.plugin.maven.testplan.TestPlanExecutionSetupStrategyFactory;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.surefire.SurefirePlugin;

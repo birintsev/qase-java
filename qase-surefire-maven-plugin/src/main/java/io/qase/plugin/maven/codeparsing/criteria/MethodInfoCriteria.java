@@ -1,6 +1,6 @@
-package io.qase.maven.plugin.codeparsing.criteria;
+package io.qase.plugin.maven.codeparsing.criteria;
 
-import io.qase.maven.plugin.util.TriPredicate;
+import io.qase.plugin.maven.util.TriPredicate;
 import lombok.Builder;
 import lombok.Getter;
 

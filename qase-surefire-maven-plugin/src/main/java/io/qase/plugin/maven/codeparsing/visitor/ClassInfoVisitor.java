@@ -1,18 +1,17 @@
-package io.qase.maven.plugin.codeparsing.visitor;
+package io.qase.plugin.maven.codeparsing.visitor;
 
-import io.qase.maven.plugin.codeparsing.model.ClassInfo;
-import io.qase.maven.plugin.codeparsing.model.MethodInfo;
+import io.qase.plugin.maven.codeparsing.model.ClassInfo;
+import io.qase.plugin.maven.codeparsing.model.MethodInfo;
+import io.qase.plugin.maven.codeparsing.CodeParsingConstants;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
-
-import static io.qase.maven.plugin.codeparsing.CodeParsingConstants.ASM_API_VERSION;
 
 public class ClassInfoVisitor extends ClassVisitor {
 
     private final ClassInfo classInfo;
 
     public ClassInfoVisitor(ClassInfo classInfo) {
-        super(ASM_API_VERSION);
+        super(CodeParsingConstants.ASM_API_VERSION);
         this.classInfo = classInfo;
     }
 

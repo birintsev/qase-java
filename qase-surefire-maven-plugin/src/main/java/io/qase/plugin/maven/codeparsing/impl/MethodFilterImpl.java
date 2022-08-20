@@ -1,10 +1,10 @@
-package io.qase.maven.plugin.codeparsing.impl;
+package io.qase.plugin.maven.codeparsing.impl;
 
-import io.qase.maven.plugin.codeparsing.model.ClassInfo;
-import io.qase.maven.plugin.codeparsing.MethodFilter;
-import io.qase.maven.plugin.codeparsing.criteria.MethodInfoCriteria;
-import io.qase.maven.plugin.codeparsing.model.MethodInfo;
-import io.qase.maven.plugin.util.TriPredicate;
+import io.qase.plugin.maven.codeparsing.model.ClassInfo;
+import io.qase.plugin.maven.codeparsing.MethodFilter;
+import io.qase.plugin.maven.codeparsing.criteria.MethodInfoCriteria;
+import io.qase.plugin.maven.codeparsing.model.MethodInfo;
+import io.qase.plugin.maven.util.TriPredicate;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

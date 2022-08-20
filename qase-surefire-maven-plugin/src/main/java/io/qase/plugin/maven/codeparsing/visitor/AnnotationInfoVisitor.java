@@ -1,16 +1,15 @@
-package io.qase.maven.plugin.codeparsing.visitor;
+package io.qase.plugin.maven.codeparsing.visitor;
 
-import io.qase.maven.plugin.codeparsing.model.AnnotationInfo;
+import io.qase.plugin.maven.codeparsing.model.AnnotationInfo;
+import io.qase.plugin.maven.codeparsing.CodeParsingConstants;
 import org.objectweb.asm.AnnotationVisitor;
-
-import static io.qase.maven.plugin.codeparsing.CodeParsingConstants.ASM_API_VERSION;
 
 public class AnnotationInfoVisitor extends AnnotationVisitor {
 
     private final AnnotationInfo annotationInfo;
 
     public AnnotationInfoVisitor(AnnotationInfo annotationInfo) {
-        super(ASM_API_VERSION);
+        super(CodeParsingConstants.ASM_API_VERSION);
         this.annotationInfo = annotationInfo;
     }
 

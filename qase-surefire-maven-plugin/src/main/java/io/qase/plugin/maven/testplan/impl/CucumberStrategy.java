@@ -1,10 +1,10 @@
-package io.qase.maven.plugin.testplan.impl;
+package io.qase.plugin.maven.testplan.impl;
 
 import io.qase.api.exceptions.QaseException;
 import io.qase.api.exceptions.UncheckedQaseException;
 import io.qase.api.service.TestPlanService;
-import io.qase.maven.plugin.QaseSurefirePlugin;
-import io.qase.maven.plugin.testplan.TestPlanExecutionSetupStrategy;
+import io.qase.plugin.maven.QaseSurefirePlugin;
+import io.qase.plugin.maven.testplan.TestPlanExecutionSetupStrategy;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
